@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32613.413
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWpfApp", "MyWpfApp\MyWpfApp.csproj", "{B03CF0BC-615C-4347-8887-B2EBF414B3E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiSelectionComboBoxLib", "MultiSelectionComboBoxLib\MultiSelectionComboBoxLib.csproj", "{81EFE457-7686-4220-B657-F9EAB6A37E2D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B03CF0BC-615C-4347-8887-B2EBF414B3E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B03CF0BC-615C-4347-8887-B2EBF414B3E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B03CF0BC-615C-4347-8887-B2EBF414B3E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B03CF0BC-615C-4347-8887-B2EBF414B3E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81EFE457-7686-4220-B657-F9EAB6A37E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81EFE457-7686-4220-B657-F9EAB6A37E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81EFE457-7686-4220-B657-F9EAB6A37E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81EFE457-7686-4220-B657-F9EAB6A37E2D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1BDDF43A-4063-4FF4-8544-D3EDF714BFF7}
+	EndGlobalSection
+EndGlobal

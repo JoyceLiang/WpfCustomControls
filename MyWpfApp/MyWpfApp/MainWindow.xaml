@@ -1,0 +1,13 @@
+﻿<Window x:Class="MyWpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:MyWpfApp"
+        xmlns:lib="clr-namespace:Joyce.Prototype.Combobox;assembly=MultiSelectionComboBoxLib"
+        Title="MainWindow" Height="350" Width="500">
+    <Grid>
+        <lib:MultiSelectionComboBox Width="250" Height="30" 
+                                    ItemsSource="{Binding Items}" 
+                                    SelectedItemsText ="{Binding SelectedItemsText}"
+                                    Watermark="Please select item(s)" />
+    </Grid>
+</Window>
