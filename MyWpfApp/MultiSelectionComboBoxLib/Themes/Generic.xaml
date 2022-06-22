@@ -26,10 +26,10 @@
                             <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"
                                               Width="0"/>
                         </Grid.ColumnDefinitions>
-                        <ToggleButton Background="{TemplateBinding Background}"
+                        <ToggleButton Grid.Column="1" 
+                                      Background="{TemplateBinding Background}"
                                       BorderBrush="{TemplateBinding BorderBrush}"
                                       Template="{StaticResource ComboBoxToggleButton}"
-                                      Grid.Column="2" 
                                       IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" >
                         </ToggleButton>
                         

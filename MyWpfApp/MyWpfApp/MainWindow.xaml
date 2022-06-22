@@ -4,10 +4,21 @@
         xmlns:local="clr-namespace:MyWpfApp"
         xmlns:lib="clr-namespace:Joyce.Prototype.Combobox;assembly=MultiSelectionComboBoxLib"
         Title="MainWindow" Height="350" Width="500">
+    <Window.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="myCT" >
+                <StackPanel Orientation="Vertical">
+                    <TextBlock>Hello</TextBlock>
+                    <lib:MultiSelectionComboBox Width="250" Height="30" 
+                                                ItemsSource="{Binding Items}" 
+                                                SelectedItemsText ="{Binding SelectedItemsText}"
+                                                Watermark="Please select item(s)" 
+                                                HorizontalAlignment="Left"/>
+                </StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <lib:MultiSelectionComboBox Width="250" Height="30" 
-                                    ItemsSource="{Binding Items}" 
-                                    SelectedItemsText ="{Binding SelectedItemsText}"
-                                    Watermark="Please select item(s)" />
+        <ContentControl ContentTemplate="{StaticResource myCT}" Content="{Binding}"/>
     </Grid>
 </Window>
