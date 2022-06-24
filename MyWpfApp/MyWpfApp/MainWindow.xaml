@@ -9,16 +9,20 @@
             <DataTemplate x:Key="myCT" >
                 <StackPanel Orientation="Vertical">
                     <TextBlock>Hello</TextBlock>
-                    <lib:MultiSelectionComboBox Width="250" Height="30" 
+                    <lib:MultiSelectionComboBox Width="250" Height="30"
+                                                Name ="MultiSelectionComboBox"
                                                 ItemsSource="{Binding Items}" 
-                                                SelectedItemsText ="{Binding SelectedItemsText}"
-                                                Watermark="Please select item(s)" 
+                                                SelectedItemsText ="{Binding SelectedItemsText, Mode=TwoWay}"
+                                                Watermark="Please select..." 
                                                 HorizontalAlignment="Left"/>
+                    
                 </StackPanel>
             </DataTemplate>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
+        
         <ContentControl ContentTemplate="{StaticResource myCT}" Content="{Binding}"/>
+         
     </Grid>
 </Window>

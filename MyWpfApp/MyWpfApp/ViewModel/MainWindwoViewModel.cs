@@ -1,11 +1,36 @@
 ﻿using Microsoft.VisualStudio.PlatformUI;
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MyWpfApp.ViewModel
 {
     internal class MainWindwoViewModel : ObservableObject
     {
+        public MainWindwoViewModel(string selectedItems, List<string> items)
+        {
+            this.Items = items;
+
+            if (!string.IsNullOrWhiteSpace(selectedItems))
+            {
+                List<string> initItems = selectedItems.Split(',').ToList();
+
+                if (initItems.Except(items).Any())
+                {
+                    // invalid init value
+                    this.SelectedItemsText = string.Empty;
+                }
+                else
+                {
+                    this.SelectedItemsText = selectedItems;
+                }
+            }
+            else
+            {
+                this.SelectedItemsText = string.Empty;
+            }
+        }
+
         private string selectedItemsText;
         public string SelectedItemsText
         {

@@ -4,7 +4,7 @@
     xmlns:local="clr-namespace:Joyce.Prototype.Combobox">
 
     <Geometry x:Key="DownArrowGeometry">M 0 0 L 3.5 4 L 7 0 Z</Geometry>
-    
+
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
         <Grid>
             <Border BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Background="Transparent" />
@@ -21,66 +21,65 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid x:Name="MainGrid">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"
-                                              Width="0"/>
-                        </Grid.ColumnDefinitions>
-                        <ToggleButton Grid.Column="1" 
-                                      Background="{TemplateBinding Background}"
-                                      BorderBrush="{TemplateBinding BorderBrush}"
-                                      Template="{StaticResource ComboBoxToggleButton}"
-                                      IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" >
-                        </ToggleButton>
-                        
-                        <ContentPresenter IsHitTestVisible="False"
-                                          Margin="{TemplateBinding Padding}" 
-                                          Content="{TemplateBinding SelectedItemsText}" 
-                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                        </ContentPresenter>
-                        
-                        <TextBlock x:Name="PART_WatermarkedTextBlock"
-                                   Margin="10,8,0,0"
-                                   Cursor="IBeam"
-                                   Foreground="Gray"
-                                   IsHitTestVisible="False"
-                                   FontStyle="Italic"
-                                   Text="{TemplateBinding Watermark}" />
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"
+                                                  Width="0"/>
+                            </Grid.ColumnDefinitions>
+                            <ToggleButton Grid.Column="1" 
+                                          Background="{TemplateBinding Background}"
+                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                          Template="{StaticResource ComboBoxToggleButton}"
+                                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" >
+                            </ToggleButton>
 
-                        <Popup Grid.ColumnSpan="2"
-                               AllowsTransparency="True" 
-                               Placement="Bottom"
-                               Margin="1"
-                               IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                               PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
-                            <Grid SnapsToDevicePixels="True" 
-                                  MinWidth="{TemplateBinding ActualWidth}"
-                                  MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                            <ContentPresenter IsHitTestVisible="False"
+                                              Margin="{TemplateBinding Padding}" 
+                                              Content="{TemplateBinding SelectedItemsText}" 
+                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            </ContentPresenter>
+
+                            <TextBlock x:Name="PART_WatermarkedTextBlock"
+                                       Margin="10,8,0,0"
+                                       Cursor="IBeam"
+                                       Foreground="Gray"
+                                       IsHitTestVisible="False"
+                                       FontStyle="Italic"
+                                       Text="{TemplateBinding Watermark}" />
+
+                            <Popup Grid.ColumnSpan="2"
+                                   AllowsTransparency="True" 
+                                   Placement="Bottom"
+                                   Margin="1"
+                                   IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                   PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                                <Grid SnapsToDevicePixels="True" 
+                                      MinWidth="{TemplateBinding ActualWidth}"
+                                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                     <Border x:Name="DropDownBorder" 
                                             BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
                                             Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
                                             BorderThickness="1" >
-                                        <ScrollViewer>
-                                            <ListBox Name="PART_ListBox" 
-                                                     ItemsSource="{TemplateBinding ItemsSource}"
-                                                     SelectionMode="Multiple"
-                                                     BorderThickness="0">
-                                                <ListBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <CheckBox Content="{Binding Content,RelativeSource={RelativeSource AncestorType=ListBoxItem}}" 
-                                                                  IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=ListBoxItem}}"/>
-                                                    </DataTemplate>
-                                                </ListBox.ItemTemplate>
-                                            </ListBox>
-                                        </ScrollViewer>
+                                        <ListBox Name="PART_ListBox" 
+                                                 ItemsSource="{TemplateBinding ItemsSource}"
+                                                 SelectionMode="Multiple"
+                                                 BorderThickness="0">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <CheckBox Content="{Binding Content,RelativeSource={RelativeSource AncestorType=ListBoxItem}}" 
+                                                              IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                                              Focusable="False"/>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
                                     </Border>
                                 </Grid>
-                        </Popup>
-                    </Grid>
+                            </Popup>
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasItems" Value="False">
