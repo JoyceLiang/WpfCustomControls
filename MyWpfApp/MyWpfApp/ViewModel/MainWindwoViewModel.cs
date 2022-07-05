@@ -13,7 +13,7 @@ namespace MyWpfApp.ViewModel
 
             if (!string.IsNullOrWhiteSpace(selectedItems))
             {
-                List<string> initItems = selectedItems.Split(',').ToList();
+                List<string> initItems = selectedItems.Split(',').Select(x=> x.Trim()).ToList();
 
                 if (initItems.Except(items).Any())
                 {
@@ -22,7 +22,7 @@ namespace MyWpfApp.ViewModel
                 }
                 else
                 {
-                    this.SelectedItemsText = selectedItems;
+                    this.SelectedItemsText = string.Join(", ", initItems);
                 }
             }
             else

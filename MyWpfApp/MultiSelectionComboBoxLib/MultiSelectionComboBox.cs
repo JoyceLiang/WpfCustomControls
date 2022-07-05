@@ -11,10 +11,11 @@ namespace Joyce.Prototype.Combobox
     [TemplatePart(Name = PART_WatermarkedTextBlock, Type = typeof(TextBlock))]
     public class MultiSelectionComboBox : ComboBox
     {
-        private const string Delimeter = ",";
+        private const string DelimeterStr = ", ";
+        private const char DelimeterChar = ',';
         private const string PART_ListBox = "PART_ListBox";
         private const string PART_WatermarkedTextBlock = "PART_WatermarkedTextBlock";
-        private static TextBlock WartermarkerTestBlock;
+        private TextBlock wartermarkedTextBlock;
 
         static MultiSelectionComboBox()
         {
@@ -22,7 +23,7 @@ namespace Joyce.Prototype.Combobox
         }
 
         public static readonly DependencyProperty WatermarkProperty =
-           DependencyProperty.Register("Watermark", typeof(string), typeof(MultiSelectionComboBox), 
+           DependencyProperty.Register(nameof(Watermark), typeof(string), typeof(MultiSelectionComboBox), 
                new PropertyMetadata("Please select item(s)"));
 
         public string Watermark
@@ -32,11 +33,8 @@ namespace Joyce.Prototype.Combobox
         }
 
         public static readonly DependencyProperty SelectedItemsTextProperty =
-            DependencyProperty.Register("SelectedItemsText", typeof(string), typeof(MultiSelectionComboBox), 
-                new FrameworkPropertyMetadata(new PropertyChangedCallback(OnSelectedItemsTextPropertyChanged))
-            {
-                BindsTwoWayByDefault = true
-            });
+            DependencyProperty.Register(nameof(SelectedItemsText), typeof(string), typeof(MultiSelectionComboBox), 
+                new FrameworkPropertyMetadata(new PropertyChangedCallback(OnSelectedItemsTextPropertyChanged)){BindsTwoWayByDefault = true});
 
         public string SelectedItemsText
         {
@@ -44,28 +42,29 @@ namespace Joyce.Prototype.Combobox
             set => SetValue(SelectedItemsTextProperty, value);
         }
 
-        private ListBox listBoxPart;
-        public ListBox ListBoxPart
+        private ListBox listBox;
+        private ListBox ListBox
         {
-            get => this.listBoxPart;
+            get => this.listBox;
             set
             {
-                if (this.listBoxPart != null)
+                if (this.listBox != null)
                 {
-                    this.listBoxPart.SelectionChanged -= ListboxPart_SelectionChanged;
-                    this.listBoxPart.Loaded -= ListBoxPart_Loaded;
+                    this.listBox.SelectionChanged -= ListboxPart_SelectionChanged;
+                    this.listBox.Loaded -= ListBoxPart_Loaded;
                 }
 
-                this.listBoxPart = value;
+                this.listBox = value;
 
-                this.listBoxPart.SelectionChanged += ListboxPart_SelectionChanged;
-                this.listBoxPart.Loaded += ListBoxPart_Loaded;
+                this.listBox.SelectionChanged += ListboxPart_SelectionChanged;
+                this.listBox.Loaded += ListBoxPart_Loaded;
             }
         }
 
         private void ListBoxPart_Loaded(object sender, RoutedEventArgs e)
         {
-            ListBoxItem firstListBoxItem = GetChildOfType<ListBoxItem>(sender as DependencyObject);
+            ListBoxItem firstListBoxItem = (ListBoxItem)(this.ListBox.ItemContainerGenerator.ContainerFromIndex(0));
+
             _ = firstListBoxItem?.Focus();
 
             if (string.IsNullOrWhiteSpace(this.SelectedItemsText))
@@ -73,31 +72,27 @@ namespace Joyce.Prototype.Combobox
                 return;
             }
 
-            string[] selectedItems = this.SelectedItemsText.Split(',');
+            string[] selectedItems = this.SelectedItemsText.Split(DelimeterChar).Select(x => x.Trim()).ToArray();
             
             if (selectedItems.Length == 0)
             {
                 return;
             }
 
-            if (this.listBoxPart.SelectedItems.Count > 0)
+            if (this.ListBox.SelectedItems.Count > 0)
             {
                 // Only select list item from code for the first time
                 return;
             }
 
             // Preselect list item by initial SelectedItemsText
-            var virtualizingStackPanel = GetChildOfType<VirtualizingStackPanel>(sender as DependencyObject);
-            if (virtualizingStackPanel != null)
+            for (int i=0; i < this.ListBox.Items.Count; i++)
             {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(virtualizingStackPanel); i++)
-                {
-                    ListBoxItem item = (ListBoxItem)VisualTreeHelper.GetChild(virtualizingStackPanel, i);
+                ListBoxItem item = (ListBoxItem)(this.ListBox.ItemContainerGenerator.ContainerFromIndex(i));
 
-                    if (selectedItems.Contains((string)item.Content))
-                    {
-                        item.IsSelected = true;
-                    }
+                if (selectedItems.Contains((string)item?.Content))
+                {
+                    item.IsSelected = true;
                 }
             }
         }
@@ -106,17 +101,20 @@ namespace Joyce.Prototype.Combobox
         {
             var control = d as MultiSelectionComboBox;
 
-            WartermarkerTestBlock.Visibility = (control != null && !string.IsNullOrWhiteSpace(e.NewValue as string)) ?
+            if (control != null)
+            {
+                control.wartermarkedTextBlock.Visibility = (!string.IsNullOrWhiteSpace(e.NewValue as string)) ?
                     Visibility.Collapsed :
                     Visibility.Visible;
+            }
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            this.ListBoxPart = this.GetTemplateChild(PART_ListBox) as ListBox;
-            WartermarkerTestBlock = this.GetTemplateChild(PART_WatermarkedTextBlock) as TextBlock;
+            this.ListBox = this.GetTemplateChild(PART_ListBox) as ListBox;
+            this.wartermarkedTextBlock = this.GetTemplateChild(PART_WatermarkedTextBlock) as TextBlock;
         }
 
         private void ListboxPart_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -127,12 +125,12 @@ namespace Joyce.Prototype.Combobox
  
         private void UpdateText()
         {
-            if (this.ListBoxPart == null )
+            if (this.ListBox == null )
             {
                 this.SelectedItemsText = string.Empty;
                 // report error!
             }
-            else if(this.ListBoxPart.SelectedItems.Count == 0)
+            else if(this.ListBox.SelectedItems.Count == 0)
             {
                 this.SelectedItemsText = string.Empty;
             }
@@ -140,28 +138,13 @@ namespace Joyce.Prototype.Combobox
             {
                 List<string> results = new List<string>();
 
-                foreach (var item in this.ListBoxPart.SelectedItems)
+                foreach (var item in this.ListBox.SelectedItems)
                 {
                     results.Add((string)item);
                 }
                 
-                this.SelectedItemsText = string.Join(Delimeter, results);
+                this.SelectedItemsText = string.Join(DelimeterStr, results);
             }
-        }
-
-        private static T GetChildOfType<T>(DependencyObject parent) where T: DependencyObject
-        {
-            if (parent == null) return null;
-
-            for (int i=0; i< VisualTreeHelper.GetChildrenCount(parent); i++)
-            {
-                var child = VisualTreeHelper.GetChild(parent, i);
-                var result = (child as T) ?? GetChildOfType<T>(child);
-
-                if(result != null) return result;
-            }
-
-            return null;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace MyWpfApp
         public MainWindow()
         {
             InitializeComponent();
-            var viewModel = new MainWindwoViewModel("bbb", new List<string> { "aaa", "bbb", "ccc" });
+            var viewModel = new MainWindwoViewModel(selectedItems:"bbb, ccc", new List<string> { "aaa", "bbb", "ccc" });
 
             DataContext = viewModel;
         }
