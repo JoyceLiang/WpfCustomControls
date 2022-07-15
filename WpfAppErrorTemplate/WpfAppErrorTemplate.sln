@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.32715.46
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppErrorTemplate", "WpfAppErrorTemplate\WpfAppErrorTemplate.csproj", "{850522DD-7DAD-4359-8D82-59842B5E7323}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{850522DD-7DAD-4359-8D82-59842B5E7323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{850522DD-7DAD-4359-8D82-59842B5E7323}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{850522DD-7DAD-4359-8D82-59842B5E7323}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{850522DD-7DAD-4359-8D82-59842B5E7323}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72CC896A-9344-4ED7-828D-8994331A1A2B}
+	EndGlobalSection
+EndGlobal
