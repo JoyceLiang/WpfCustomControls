@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.32907.161
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrapControlByTrigger", "WrapControlByTrigger\WrapControlByTrigger.csproj", "{0DF23390-A464-41CC-A9AA-7CB72155461C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0DF23390-A464-41CC-A9AA-7CB72155461C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DF23390-A464-41CC-A9AA-7CB72155461C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DF23390-A464-41CC-A9AA-7CB72155461C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DF23390-A464-41CC-A9AA-7CB72155461C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {479A1CE2-6EB3-4739-B4CF-610633270D4E}
+	EndGlobalSection
+EndGlobal
